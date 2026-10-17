@@ -1,10 +1,9 @@
 displayplacer
 https://github.com/jakehilborn/displayplacer
 
-Display Save was independently implemented after studying displayplacer's
-approach to macOS display configuration, particularly MonitorPanel rotation
-and display identity caveats. No displayplacer executable or source files are
-bundled. The upstream MIT notice is reproduced here to acknowledge that work.
+Some of Display Save's display-management approach was inspired by
+displayplacer. Thanks to Jake Hilborn and the contributors for sharing their
+work! The upstream MIT notice follows.
 
 The MIT License (MIT)
 

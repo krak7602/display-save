@@ -1,6 +1,6 @@
 # Display Save
 
-A native macOS menu-bar app for saving and restoring named display layouts. Requires macOS 14 or later. The app runs locally without accounts, telemetry, network access, or Accessibility permission.
+Native macOS display layout presets. Save and restore named layouts from the menu bar. Requires macOS 14 or later; no accounts, telemetry, network access, or Accessibility permission.
 
 ## Install
 
@@ -40,7 +40,7 @@ The versioned JSON file is written atomically. Corrupt or newer-format data is n
 
 ## Native implementation and limitations
 
-- SwiftUI popover and AppKit status item, public CoreGraphics display configuration APIs, and public ColorSync UUIDs. No `displayplacer` installation or CLI dependency.
+- SwiftUI popover and AppKit status item, public CoreGraphics display configuration APIs, and public ColorSync UUIDs.
 - Captures origin, primary display, rotation, logical/backing pixel dimensions, reported refresh rate, and mirror relationships. It does not manage app-window positions, brightness, HDR, color profiles, True Tone, Night Shift, display power, or disabling displays.
 - Apple exposes no public rotation setter. A small Objective-C bridge dynamically loads the private **MonitorPanel** framework, validates its runtime interfaces, and verifies the resulting orientation. It can fail on unsupported hardware or future macOS releases. This private API is not suitable for Mac App Store distribution.
 - CoreGraphics changes are session-only until Keep. MonitorPanel’s rotation setter has no session-only option; macOS controls its persistence. Normal failures, timeout, and quit paths attempt explicit rollback. A force-kill, crash, or power loss cannot run rollback.
@@ -88,6 +88,6 @@ CI tests and builds pull requests and `main`. The release workflow checks that t
 
 Display Save is licensed under the [MIT License](LICENSE), copyright © 2026 Display Save contributors.
 
-[**displayplacer** by Jake Hilborn](https://github.com/jakehilborn/displayplacer) informed this implementation’s approach to macOS display configuration—particularly rotation through MonitorPanel’s `MPDisplay` API and persistent display-identity caveats. Display Save was independently implemented; it is not a fork or CLI wrapper, and no displayplacer executable or source files are bundled. Its MIT copyright and permission notice are preserved in [NOTICE](NOTICE) as acknowledgement of that work.
+Some of Display Save’s display-management approach was inspired by [**displayplacer**](https://github.com/jakehilborn/displayplacer). Thanks to Jake Hilborn and all the contributors for sharing their work! The upstream MIT notice is included in [NOTICE](NOTICE).
 
-The app and menu-bar icons share original overlapping-monitor artwork, not Apple’s SF Symbols. The app icon uses a matte-black background and muted silver, without gradients or gloss. `scripts/generate-assets.swift` is their source.
+The app and menu bar share original overlapping-monitor artwork. The app icon uses a matte-black background and muted silver, without gradients or gloss. `scripts/generate-assets.swift` is their source.

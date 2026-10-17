@@ -2,6 +2,12 @@
 
 Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.0.1 — 2026-10-18
+
+- Clarify the project description.
+- Make the displayplacer acknowledgements in the README and bundled notice friendlier.
+- Update GitHub Actions to maintained Node.js 24-based actions.
+
 ## 1.0.0 — 2026-10-18
 
 - Native menu-bar app for saving, switching, and deleting named display layouts.
