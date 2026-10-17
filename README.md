@@ -90,4 +90,4 @@ Display Save is licensed under the [MIT License](LICENSE), copyright © 2026 Dis
 
 [**displayplacer** by Jake Hilborn](https://github.com/jakehilborn/displayplacer) informed this implementation’s approach to macOS display configuration—particularly rotation through MonitorPanel’s `MPDisplay` API and persistent display-identity caveats. Display Save was independently implemented; it is not a fork or CLI wrapper, and no displayplacer executable or source files are bundled. Its MIT copyright and permission notice are preserved in [NOTICE](NOTICE) as acknowledgement of that work.
 
-The app and menu-bar icons are original two-monitor artwork, not Apple’s SF Symbols. `scripts/generate-assets.swift` is their source.
+The app and menu-bar icons share original overlapping-monitor artwork, not Apple’s SF Symbols. The app icon uses a matte-black background and muted silver, without gradients or gloss. `scripts/generate-assets.swift` is their source.
