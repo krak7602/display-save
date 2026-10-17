@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags: ['v[0-9]*.[0-9]*.[0-9]*']
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: macos-15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Check release version
+        shell: bash
+        run: |
+          version="$(cat VERSION)"
+          [[ "$GITHUB_REF_NAME" == "v$version" ]] || {
+            echo 'Tag must match VERSION.' >&2
+            exit 1
+          }
+      - name: Test
+        run: swift test
+      - name: Build universal app and custom DMG
+        run: make release
+      - name: Verify disk image
+        run: |
+          hdiutil verify "dist/Display-Save-$(cat VERSION)-universal.dmg"
+          cd dist
+          shasum -a 256 -c SHA256SUMS.txt
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          version="$(cat VERSION)"
+          gh release create "$GITHUB_REF_NAME" \
+            "dist/Display-Save-$version-universal.dmg" dist/SHA256SUMS.txt \
+            --verify-tag --title "Display Save $version" --notes-file CHANGELOG.md
